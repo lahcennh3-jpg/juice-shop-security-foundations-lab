@@ -1,0 +1,25 @@
+# Private authorization and environment records
+scope/authorization.local.json
+.env
+.env.*
+!.env.example
+
+# Raw or sensitive evidence
+evidence/private/
+evidence/raw/
+evidence/**/*.har
+evidence/**/*.pcap
+
+# Runtime output
+*.log
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+

@@ -1,0 +1,28 @@
+name: Authorization gate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run authorization-gate regression tests
+        run: python -m unittest discover -s tests -v
+      - name: Confirm the public template fails closed
+        run: |
+          set +e
+          python scripts/authorization_gate.py scope/authorization.example.json
+          status=$?
+          set -e
+          test "$status" -eq 2
+

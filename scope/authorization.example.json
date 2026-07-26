@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "status": "DRAFT",
+  "authorization": {
+    "authorization_id": "REPLACE_ME",
+    "target_owner": {
+      "name": "REPLACE_ME",
+      "relationship": "REPLACE_ME",
+      "verification_method": "REPLACE_ME"
+    },
+    "authorized_by": {
+      "name": "REPLACE_ME",
+      "role": "REPLACE_ME",
+      "verification_method": "REPLACE_ME"
+    },
+    "valid_from_utc": "REPLACE_ME",
+    "valid_until_utc": "REPLACE_ME"
+  },
+  "scope": {
+    "repository": "lahcennh3-jpg/juice-shop-security-foundations-lab",
+    "target": {
+      "name": "OWASP Juice Shop",
+      "release": "v20.1.1",
+      "source_commit": "f915bddd82790d0f3018902d36ae9b4241a5f51f",
+      "container_image": "bkimminich/juice-shop:v20.1.1",
+      "instance_id": "REPLACE_ME"
+    },
+    "environment": {
+      "type": "private-github-codespace",
+      "host": "127.0.0.1",
+      "port": 3000,
+      "public_exposure_allowed": false
+    },
+    "allowed_activities": [
+      "planning",
+      "documentation",
+      "local source inspection",
+      "manual testing after authorization",
+      "sanitized evidence collection",
+      "remediation and regression testing"
+    ],
+    "prohibited_activities": [
+      "testing unlisted targets",
+      "denial of service or resource exhaustion",
+      "credential stuffing or brute force",
+      "malware, persistence, or destructive modification",
+      "social engineering or collection of real credentials",
+      "outbound callbacks or SSRF to real external services",
+      "publication of secrets, private URLs, or unredacted sensitive evidence"
+    ],
+    "excluded_assets": [
+      "GitHub and GitHub Codespaces infrastructure",
+      "public Juice Shop demonstrations",
+      "third-party systems and services",
+      "external IP addresses and domains",
+      "production systems and data"
+    ]
+  },
+  "limits": {
+    "requests_per_second": 2,
+    "concurrency": 1
+  },
+  "data": {
+    "classification": "synthetic-only",
+    "real_personal_data_allowed": false
+  },
+  "evidence": {
+    "directory": "evidence/",
+    "redact_secrets": true,
+    "redact_private_urls": true,
+    "record_timestamps_and_hashes": true
+  },
+  "stop_conditions": [
+    "target or environment differs from the authorized record",
+    "port 3000 becomes public",
+    "real data or a third-party system is encountered",
+    "authorization expires or is revoked",
+    "the target or environment becomes unstable"
+  ],
+  "cleanup": [
+    "stop and remove the lab container",
+    "close port forwarding",
+    "remove synthetic runtime data",
+    "sanitize or delete sensitive evidence"
+  ],
+  "attestations": {
+    "record_complete": false,
+    "ownership_verified": false,
+    "authorization_verified": false,
+    "rules_of_engagement_approved": false
+  }
+}
+

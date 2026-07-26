@@ -3,10 +3,31 @@ services:
     image: bkimminich/juice-shop:v20.1.1
     container_name: juice-shop-security-foundations-lab
     restart: "no"
-    ports:
-      - "127.0.0.1:3000:3000"
+    expose:
+      - "3000"
     networks:
       - lab-internal
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+  lab-proxy:
+    image: nginxinc/nginx-unprivileged:1.29.5-alpine
+    container_name: juice-shop-security-foundations-proxy
+    restart: "no"
+    depends_on:
+      - juice-shop
+    ports:
+      - "127.0.0.1:3000:8080"
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - lab-internal
+      - lab-access
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
     cap_drop:
       - ALL
     security_opt:
@@ -15,3 +36,4 @@ services:
 networks:
   lab-internal:
     internal: true
+  lab-access:

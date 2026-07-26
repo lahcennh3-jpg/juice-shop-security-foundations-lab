@@ -1,0 +1,12 @@
+services:
+  juice-shop:
+    image: bkimminich/juice-shop:v20.1.1
+    container_name: juice-shop-security-foundations-lab
+    restart: "no"
+    ports:
+      - "127.0.0.1:3000:3000"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+

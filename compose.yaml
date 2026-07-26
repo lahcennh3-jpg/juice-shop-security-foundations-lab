@@ -5,8 +5,13 @@ services:
     restart: "no"
     ports:
       - "127.0.0.1:3000:3000"
+    networks:
+      - lab-internal
     cap_drop:
       - ALL
     security_opt:
       - no-new-privileges:true
 
+networks:
+  lab-internal:
+    internal: true
